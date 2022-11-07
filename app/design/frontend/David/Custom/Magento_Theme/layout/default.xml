@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body> 
+    
+         <referenceBlock name="header.panel" remove="true" /> 
+        <referenceBlock name="header-wrapper" remove="true" /> 
+        <referenceBlock name="catalog.compare.link" remove="true" />
+        <referenceBlock name="top.links">
+                <referenceBlock name="wish-list-link" remove="true" />     
+                <referenceBlock name="my-account-link" remove="true" />               
+        </referenceBlock>
+        <referenceContainer name="page.wrapper"> 
+            <container name="above.header.container" htmlTag="div" htmlClass="header-content" before="-">
+              <block class="Magento\Cms\Block\Block" name="above_header_content_map">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">above-header-content</argument>
+                    </arguments>
+               </block>
+            </container>
+        </referenceContainer>
+        <referenceContainer name="header.container">
+            <block name="nav.toggle" before="-">
+                        <arguments>
+                            <argument name="template" xsi:type="string">Magento_Theme::nav-toggle.phtml</argument>
+                        </arguments>
+            </block>
+            <container name="custom.header.container" htmlTag="div" htmlClass="myheader" before="-">
+                <container name="custom.header.container.logo" htmlTag="div" htmlClass="logo" before="-">
+                </container>
+                <container name="custom.header.container.content" htmlTag="div" htmlClass="content">
+                    <container name="custom.header.container.content.above" htmlTag="div" htmlClass="content-above">
+
+                    <block class="Magento\Cms\Block\Block" name="call_us_map">
+                        <arguments>
+                            <argument name="block_id" xsi:type="string">call-us</argument>
+                        </arguments>
+                    </block>
+                    <block class="David\Custom\Block\Customer" name="top.links" template="Magento_Theme::toplink.phtml" after="call_us_map">
+                    </block>
+                    </container>
+                    <container name="custom.header.container.content.under" htmlTag="div" htmlClass="content-under" after="custom.header.container.content.above">
+                        <block class="Magento\Cms\Block\Block" name="page_link_header_map">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">page-link-header</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                    <container name="mobile-logo" htmlTag="div" htmlClass="mobile-container" after="custom.header.container.content.under">
+                        <block class="Magento\Cms\Block\Block" name="mobile_logo">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">mobile-logo</argument>
+                            </arguments>
+                        </block>
+                    </container>
+                </container>
+            </container>
+        </referenceContainer>  
+        <!-- <move element="top.links" destination="custom.header.container.content.above"  /> -->
+        <move element="minicart" destination="custom.header.container.content.above" />
+        <move element="logo" as="logo" destination="custom.header.container.logo" before="-"/> 
+        <move element="top.search" destination="custom.header.container.content.under" />
+    </body>
+</page>
